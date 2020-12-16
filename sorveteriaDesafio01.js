@@ -51,7 +51,7 @@ var maiorMenorPedido = (array) => {
   array.map((array) => {
     let valorTotal = 0;
     for (itemP in array.pedidos) {
-      valorTotal += cardapio[array.pedidos[itemP]]; // cardapio[item.pedidos[itemP] por que esta acessando a propriedade do objeto.
+      valorTotal += cardapio[array.pedidos[itemP]]; 
     }
     array.valorPedido = valorTotal;
     arrayTotal.push(array.valorPedido);
