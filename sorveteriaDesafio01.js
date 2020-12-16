@@ -5,7 +5,7 @@ const cardapio = {
   casquinha: 5.07,
   cascao: 10.5,
   bananaSplit: 15.31,
-  data: dataHoje
+ 
 };
 
 const pedidosDoDia = [
