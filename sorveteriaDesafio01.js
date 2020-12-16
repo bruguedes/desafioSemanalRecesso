@@ -11,7 +11,7 @@ const cardapio = {
 const pedidosDoDia = [
   {
     nome: "Bruno",
-    pedidos: { item1: "cascao", item2: "bananaSplit", item3: "casquinha" },
+    pedidos: { item1:"casquinha" },
     valorPedido: null,
     data: dataHoje
   },
@@ -54,7 +54,7 @@ var maiorMenorPedido = (array) => {
       valorTotal += cardapio[array.pedidos[itemP]]; 
     }
     array.valorPedido = valorTotal;
-    arrayTotal.push(array.valorPedido);
+    arrayTotal.push(valorTotal);
   });
   let media = arrayTotal.reduce((acc, valor) => acc + valor) / array.length;
   return [arrayTotal.indexOf(Math.max(...arrayTotal)),arrayTotal.indexOf(Math.min(...arrayTotal)), media,
@@ -87,7 +87,7 @@ var enviarJson = (_pedidosDoDia, callback) => {
       valorTotal: Number(ValorMenorPedido.toFixed(2)),
       pedidoFeito: itemsPedidosMenor,
     },
-    totalDePedidos: _pedidosDoDia.length,
+    totalGeralPedidos: _pedidosDoDia.length,
     mediaTotaldoDia: Number(posicaoArray[2].toFixed(2)),
   };
  return JSON.stringify(objParaJson);
