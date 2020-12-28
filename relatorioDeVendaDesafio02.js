@@ -115,5 +115,4 @@ let gerarRelatorio = (array) => {
   console.log(`Pior Vendedor: ${indice(arrDadosDeVenda, "menor", maiorMenorVenda)}`);
 };
 //#########################################################################################
-
 gerarRelatorio(arrInicial);
