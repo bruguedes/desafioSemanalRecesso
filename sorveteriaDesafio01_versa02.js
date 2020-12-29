@@ -1,6 +1,6 @@
 var data = new Date();
 const dataHoje =
-  data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear();
+  data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear();
 const cardapio = {
   picole: 3.25,
   casquinha: 5.75,

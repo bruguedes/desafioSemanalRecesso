@@ -1,5 +1,5 @@
 var minhaData = new Date();
-const dataHoje = minhaData.getDate() + "/" +minhaData.getMonth() +"/" +minhaData.getFullYear();
+const dataHoje = minhaData.getDate() + "/" +(minhaData.getMonth()+1 )+"/" +minhaData.getFullYear();
 const cardapio = {
   picole: 3.25,
   casquinha: 5.07,
