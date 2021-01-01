@@ -1,6 +1,6 @@
 var data = new Date();
 const dataHoje =
-  data.getDate() + "/" + (data.getMonth()+1) + "/" + data.getFullYear();
+  data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
 const cardapio = {
   picole: 3.25,
   casquinha: 5.75,
@@ -19,8 +19,6 @@ const pedidosDoDia = [
     nome: "Seiya de Pégaso",
     pedidos: {
       item1: "bananaSplit",
-      item2: "casquinha",
-      item3: "cascao",
     },
   },
   {
@@ -31,24 +29,31 @@ const pedidosDoDia = [
   {
     data: dataHoje,
     nome: "Natsu Dragneel",
-    pedidos: { item1: "picole" },
+    pedidos: {
+      item1: "picole",
+      item2: "cascao",
+    },
   },
   {
     data: dataHoje,
     nome: "Escanor",
-    pedidos: { item1: "casquinha" },
+    pedidos: {
+      item1: "casquinha",
+      item2: "casquinha",
+      item3: "cascao",
+    },
   },
 ];
 const valorCadaPedido = [];
 //###########################################################################################
 //Faz a soma de cada item do objeto pedidos e insere o valor em um novo array valorCadaPedido.
 var somarCadaPedido = (array) => {
-  array.map((array) => {
+  array.map((itens) => {
     let valorTotal = 0;
-    for (itemP in array.pedidos) {
-      valorTotal += cardapio[array.pedidos[itemP]];
+    for (itemP in itens.pedidos) {
+      valorTotal += cardapio[itens.pedidos[itemP]];
     }
-    array.valorTotal = valorTotal;
+    itens.valorTotal = valorTotal;
     valorCadaPedido.push(valorTotal);
   });
   return valorCadaPedido;
@@ -56,14 +61,12 @@ var somarCadaPedido = (array) => {
 //#########################################################################################
 //recebe como atributo um array com a somatoria de cada item de cada pedido do dia
 // e busca a posicao do objeto no array que contem o maior e menor valor do array pedidos do dia.
-const procuraMaiorPedido = (arrayPedidoSomado) => {
-  let posicao = arrayPedidoSomado.indexOf(Math.max(...arrayPedidoSomado));
+const procuraMaiorMenor = (arrayPedidoSomado, maiorOuMenor) => {
+  let tipo = maiorOuMenor === "maior" ? Math.max : Math.min;
+  let posicao = arrayPedidoSomado.indexOf(tipo(...arrayPedidoSomado));
   return pedidosDoDia[posicao];
 };
-const procuraMenorPedido = (arrayPedidoSomado) => {
-  let posicao = arrayPedidoSomado.indexOf(Math.min(...arrayPedidoSomado));
-  return pedidosDoDia[posicao];
-};
+
 //#########################################################################################
 //Recebe array do valor total de cada pedido, soma todo seus valores e divide pelo numero de
 //posições do mesmo.
@@ -79,8 +82,8 @@ const mediaTotaldoDia = (arrayPedidoSomado) => {
 preparaDadosParaJson = (array) => {
   let arraySomado = somarCadaPedido(array);
   return {
-    maiorPedido: procuraMaiorPedido(arraySomado),
-    menorPedido: procuraMenorPedido(arraySomado),
+    maiorPedido: procuraMaiorMenor(arraySomado, "maior"),
+    menorPedido: procuraMaiorMenor(arraySomado, "menor"),
     mediaTotalVendas: Number(mediaTotaldoDia(arraySomado).toFixed(2)),
     numeroDePedidosDia: arraySomado.length,
   };
