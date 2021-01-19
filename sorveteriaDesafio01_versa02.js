@@ -4,57 +4,28 @@ const dataHoje =
 const cardapio = {
   picole: 3.25,
   casquinha: 5.75,
-  cascao: 10.0,
-  bananaSplit: 15.3,
+  cascao: 10.00,
+  bananaSplit: 15.30,
+  acai:20.00,
+  agua: 2.00
 };
 
-const pedidosDoDia = [
-  {
-    data: dataHoje,
-    nome: "Tanjirō Kamado",
-    pedidos: { item1: "cascao" },
-  },
-  {
-    data: dataHoje,
-    nome: "Seiya de Pégaso",
-    pedidos: {
-      item1: "bananaSplit",
-    },
-  },
-  {
-    data: dataHoje,
-    nome: "Ichigo Kurosaki",
-    pedidos: { item: "bananaSplit" },
-  },
-  {
-    data: dataHoje,
-    nome: "Natsu Dragneel",
-    pedidos: {
-      item1: "picole",
-      item2: "cascao",
-    },
-  },
-  {
-    data: dataHoje,
-    nome: "Escanor",
-    pedidos: {
-      item1: "casquinha",
-      item2: "casquinha",
-      item3: "cascao",
-    },
-  },
-];
+const pedidosDoDia = [];
+
+let iserirPedido = ( data, nome, ...itens) => pedidosDoDia.push({data, nome, pedidos:[...itens]})
+
 const valorCadaPedido = [];
 //###########################################################################################
 //Faz a soma de cada item do objeto pedidos e insere o valor em um novo array valorCadaPedido.
 var somarCadaPedido = (array) => {
   array.map((itens) => {
     let valorTotal = 0;
-    for (itemP in itens.pedidos) {
-      valorTotal += cardapio[itens.pedidos[itemP]];
+    for (itemP of itens.pedidos) {
+      valorTotal += cardapio[itemP];
     }
-    itens.valorTotal = valorTotal;
+    itens.valorTotal = valorTotal.toFixed(2);
     valorCadaPedido.push(valorTotal);
+    
   });
   return valorCadaPedido;
 };
@@ -93,4 +64,11 @@ preparaDadosParaJson = (array) => {
 //dado do tipo JSON
 enviarJson = (array, callback) => JSON.stringify(callback(array));
 //#########################################################################################
+iserirPedido(dataHoje, 'Bruno','picole', 'bananaSplit', 'acai', 'bananaSplit', 'agua','picole')
+iserirPedido(dataHoje, 'Maria', 'casquinha', 'cascao', 'picole',)
+iserirPedido(dataHoje, 'José', 'picole', 'bananaSplit')
+iserirPedido(dataHoje, 'Francisco', 'cascao',  'bananaSplit')
+iserirPedido(dataHoje, 'Luizinho', 'casquinha', 'cascao', 'picole', 'bananaSplit')
+iserirPedido(dataHoje, 'Chico', 'bananaSplit')
+iserirPedido(dataHoje, 'Lobão', 'picole')
 console.log(enviarJson(pedidosDoDia, preparaDadosParaJson));
